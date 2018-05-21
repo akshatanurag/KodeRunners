@@ -15,6 +15,9 @@
 					<% if(message.length>0) {%>
                         <div class="alert alert-danger"><%= message %></div>
 						<% } %>
+						<% if(error.length>0) {%>
+							<div class="alert alert-danger"><%= error %></div>
+							<% } %>
 					<div class="wrap-input100 validate-input m-b-23">
 						<span class="label-input100">Email</span>
 						<input class="input100" type="email" name="email" placeholder="Type your email">

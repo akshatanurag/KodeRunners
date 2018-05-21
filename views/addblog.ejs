@@ -5,7 +5,7 @@
             <strong>New Blog</strong>
           </div>
           <div class="card-body card-block">
-            <form action="/blog/new" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="/blog/new" method="POST" class="form-horizontal">
            
               <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Blog Title</label></div>
@@ -14,7 +14,7 @@
       
               <div class="row form-group">
                 <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Textarea</label></div>
-                <div class="col-12 col-md-9"><textarea name="textarea-input" id="textarea-input" rows="15" placeholder="Content..." class="form-control"></textarea></div>
+                <div class="col-12 col-md-9"><textarea name="content" id="textarea-input" rows="15" placeholder="Content..." class="form-control"></textarea></div>
               </div>
               <div class="card-footer">
                   <button class="btn btn-primary btn-sm">

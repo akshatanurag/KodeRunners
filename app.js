@@ -10,10 +10,13 @@ const passportLocalMongoose = require('passport-local-mongoose');
 
 const {mongoose} = require('./db/mongoose');
 const User = require('./models/user');
-require('./config/passport')(passport);
+const {blog} = require('./models/blog');
 const middleware = require('./middleware');
 
 const authRoutes = require('./routes/auth');
+const blogRoutes = require('./routes/blog');
+
+require('./config/passport')(passport);
 
 
 var app = express();
@@ -26,29 +29,29 @@ app.use(cookieParser());
 app.set("view engine","ejs");
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use(function(req,res,next){
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
     next();
 })
 
 
 app.use(authRoutes);
+app.use("/blog",blogRoutes);
 
 app.get("/",(req,res)=>{
     res.render("index");
 });
 
+
 app.get("/dashboard",middleware.isLoggedIn,(req,res)=>{
     res.render("dashboard");
 });
 
-app.get("/blog/new",middleware.isLoggedIn,(req,res)=>{
-    res.render("addblog");
-})
+
 
 
 var port =  process.env.PORT || 3000;
