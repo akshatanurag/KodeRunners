@@ -1,0 +1,141 @@
+body {
+    font-family: "Roboto",sans-serif;
+    color: #555555;
+    font-size: 15px;
+    font-weight: 300;
+    text-rendering: optimizeLegibility;
+}
+
+.home {
+    width: 100%;
+    height: 100vh;
+       background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(https://scontent.fblr2-1.fna.fbcdn.net/v/t31.0-8/20545216_1128660110568227_2853813082929357577_o.jpg?_nc_cat=0&oh=16d5305274c224acbc69c9d549497545&oe=5B98EEA9);
+        background-size: cover;
+    background-position: center;
+}
+
+
+
+#main-title {
+    margin-top: 150px;
+}
+
+#main-title h1 {
+
+
+    color:orange;
+    text-align:left;
+    font-size: 60px;
+    font-weight: 300;
+    
+    letter-spacing: 1px;
+    word-spacing: 5px;
+    line-height:80px;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+}
+
+/*.btn:link,
+.btn:visited {
+    display: inline-block;
+    padding: 10px 30px;
+    font-weight: 500;
+    font-size: 20px;
+    text-decoration:default;
+    border-radius: 0px;
+    transition: all linear 0.2s;
+}
+
+.btn-full:link,
+.btn-full:visited {
+    background-color: #e67e22;
+    border: 1px solid #e67e22;
+    color: #fff;
+    margin-right: 15px;
+}
+
+.btn-ghost:link,
+.btn-ghost:visited {
+    border: 1px solid #cf6d17;
+    color:#fff;
+
+}
+
+.btn:hover,
+.btn:active {
+    background-color:#e67e22;
+    color:#fff;
+}*/
+
+.btn:link,
+.btn:visited {
+    display: inline-block;
+    padding: 10px 50px;
+    font-weight: 300;
+    
+    font-size:130%;
+    text-decoration: none;
+    border-radius: 100px;
+    transition: all linear 0.2s;
+}
+
+.btn-full:link,
+.btn-full:visited {
+    background-color:#e67e22;
+    border: 1px solid #e67e22;
+    color: #fff;
+    margin-right: 15px;
+}
+
+.btn-ghost:link,
+.btn-ghost:visited {
+    border: 1px solid #e67e22;
+    color: #fff;
+}
+
+.btn:hover,
+.btn:active {
+    border:1px solid #e67e22;
+    background:#e67e22;
+    color:black;
+}
+/*NAVIGATION BAR*/
+
+.main-nav{
+    float: right;
+    font-size: 22px;
+    list-style: none;
+    margin-top: 35px;
+    margin-left: 50px;
+}
+.main-nav li{
+    display: inline-block;
+    padding-left: 30px;
+    margin-top: 20px;
+    margin-left: 10px;
+    word-spacing: 24px;
+    letter-spacing: 0px;
+}
+.main-nav li a:link,
+.main-nav li a:visited{
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 90%;
+    padding-bottom: 3px;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.2s;
+    
+}
+.main-nav li a:hover{
+color: orange;
+}
+.main-nav li a:visited{
+    
+}
+#fixed{
+    color: #fff;
+    font-size:34px;
+    
+    text-align:left;
+}

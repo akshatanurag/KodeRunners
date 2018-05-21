@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Koderunners | Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="css/nav.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+  
+</head>
+<body>
+    <section class="home">
+        <div class="container">
+            <nav>
+                <div class="row">
+                    <ul class="main-nav">
+                        <li><a href="" >HOME</a></li>
+                        <li><a href="" target="_blank">ABOUT-US</a></li>
+                        <li><a href="" target="_blank">PROJECTS</a></li>
+                        <li><a href="">SESSIONS</a></li>
+                        <li><a href="">OUR-TEAM</a></li>
+                        <li><a href="">BLOG</a></li>
+                        <li><a href="">CONTACT</a></li>
+                        <% if(currentUser) {%>
+                        <li><a href="/logout">LOGOUT</a></li>
+                        <% } %>
+                    </ul>
+                </div>
+            </nav>
+    
+            <div class="row">
+                <div class="col-sm-8 col-md-8 col-lg-8">
+                    <div id="main-title">
+    
+                        <h1><font color="white">THE GUIDE TO</font> CODING <br> STARTS <font color="white">HERE</font></h1>
+    
+    <p id="fixed">Learn
+      <span class="typer" id="main" data-words="great,fun,lightweight,easy" data-colors="orange" data-delay="100" data-deleteDelay="1000"></span>
+      <span class="cursor" data-owner="main"></span></p><br>
+                        <% if(!currentUser) {%>
+                        <a class="btn btn-full" href="/login">LOGIN</a>
+                        <a class="btn btn-ghost" href="/signup">SIGN UP</a>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <canvas id="world"></canvas>
+    </section>
+    </body>
+    <script src="js/typer.js"></script>
+    </html>
