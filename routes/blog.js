@@ -70,7 +70,7 @@ router.put("/:id/edit",middleware.isLoggedIn,middleware.checkBlogOwner,(req,res)
         res.redirect("back");
     })
 });
-router.delete("/:id/delete",(req,res)=>{
+router.delete("/:id/delete",middleware.isLoggedIn,middleware.checkBlogOwner,(req,res)=>{
     blog.findByIdAndRemove(req.params.id).then(()=>{
         req.flash("success","Deleted blog successfully");
         res.redirect("back");
