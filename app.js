@@ -5,6 +5,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const bodyParser =  require('body-parser');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
+const methodOverride = require('method-override');
 
 const passportLocalMongoose = require('passport-local-mongoose');
 
@@ -35,8 +36,10 @@ app.use(flash());
 app.use(function(req,res,next){
     res.locals.currentUser = req.user;
     res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
     next();
-})
+});
+app.use(methodOverride("_method"));
 
 
 app.use(authRoutes);

@@ -29,6 +29,7 @@ router.post("/new",middleware.isLoggedIn,(req,res)=>{
     },(e)=>{
         req.flash("error","Opps! Something went wrong");
         console.log(e);
+        
     }).catch((e)=>{
         console.log(e);
     })
@@ -46,6 +47,37 @@ router.get("/view_all",middleware.isLoggedIn,(req,res)=>{
         console.log(e);
     })
 });
-
+router.get("/:id/edit",middleware.isLoggedIn,middleware.checkBlogOwner,(req,res)=>{
+    blog.findById(req.params.id).then((blog)=>{
+        res.render("edit_blog",{
+            blog
+        });
+    },(e)=>{
+        req.flash("error","something went worng");
+    });
+});
+router.put("/:id/edit",middleware.isLoggedIn,middleware.checkBlogOwner,(req,res)=>{
+    console.log(req.body)
+    blog.findByIdAndUpdate(req.params.id,{
+        title: req.body.title,
+        content: req.body.content,
+        updatedAt: new Date().getTime().toString()
+    }).then(()=>{
+        req.flash("success","Successfully Edited");
+        res.redirect("back");
+    },(e)=>{
+        req.flash("error","Something went wrong");
+        res.redirect("back");
+    })
+});
+router.delete("/:id/delete",(req,res)=>{
+    blog.findByIdAndRemove(req.params.id).then(()=>{
+        req.flash("success","Deleted blog successfully");
+        res.redirect("back");
+    },(e)=>{
+        req.flash("oops! something went wrong");
+        res.redirect("back");
+    })
+})
 
 module.exports = router;

@@ -15,7 +15,7 @@
                       <tr>
                         <th>Title</th>
                         <th>Written On</th>
-                        <th>Last Updated</th>
+                        
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -25,13 +25,15 @@
                          
                         <td><%= m[i].title %></td>
                         <td><%= m[i].createdAt %></td>
-                        <td><% if(m[i].updatedAt){%>
-                            <%= m[i].updatedAt %>
-                        <% } %>-</td>
+                       
                         <td>
                             <a style="color: white;" class="btn btn-success btn-xs">View</a>
-                            <a style="color: white;" class="btn btn-primary btn-xs">Edit</a>
-                            <a style="color: white;" class="btn btn-danger btn-xs">Delete</a>
+                            <form style="display:  inline;" action="/blog/<%= m[i].id %>/edit?_method=EDIT" method="POST">
+                            <a href="/blog/<%= m[i].id %>/edit" style="color: white;" class="btn btn-primary btn-xs">Edit</a>
+                            </form>
+                            <form style="display:  inline;" action="/blog/<%= m[i].id %>/delete?_method=DELETE" method="POST">
+                            <button style="color: white;" class="btn btn-danger btn-xs">Delete</button>
+                        </form>
                         </td>
                       </tr>
                       <% } %>
