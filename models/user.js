@@ -25,6 +25,28 @@ var userSchema = new mongoose.Schema({
         required: true,
         minlength: 6
     },
+    education:{
+        type: String
+    },
+    phone: {
+        type: Number
+    },
+    website:{
+        type: String
+    },
+    location: {
+        type: String
+    },
+    area: [{
+        type: String
+    }],
+    bio: {
+        type: String
+    },
+    role:{
+        type: Number,
+        default: 0
+    }
 });
 mongoose.Promise=global.Promise;
 // generating a hash

@@ -20,13 +20,14 @@
     <link rel="stylesheet" href="/assets/css/flag-icon.min.css">
     <link rel="stylesheet" href="/assets/css/cs-skin-elastic.css">
     <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+    <link rel="stylesheet" href="/assets/css/lib/chosen/chosen.min.css">
     <link rel="stylesheet" href="/assets/scss/style.css">
     <link href="/assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=hy83xxlyirfztb9w6llr0q3vbfwoo3xhexlbmd40pa1jb2g2"></script>
-    <script>tinymce.init({ selector:'textarea' });</script>
+   
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
@@ -48,9 +49,13 @@
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="/dashboard"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                        <li class="">
+                                <a href="/"> <i class="menu-icon fa fa-home"></i>Home </a>
+                            </li>
+                    <li class="">
+                                <a href="/dashboard"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
+                  
                     <h3 class="menu-title">Blogs</h3><!-- /.menu-title -->
                     <li class="">
                         <a href="/blog/new"  aria-expanded="false"> <i class="menu-icon fa fa-pencil-square-o"></i>Write New</a>
@@ -92,7 +97,7 @@
                     </li>
                     <h3 class="menu-title">Profile</h3><!-- /.menu-title -->
                     <li class="">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Profile</a>
+                        <a href="/profile"> <i class="menu-icon fa fa-user"></i>Profile</a>
                         
                     </li>
                 </ul>
@@ -197,7 +202,7 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                                <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+                                <a class="nav-link" href="/profile"><i class="fa fa- user"></i>My Profile</a>
 
                                 <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
 

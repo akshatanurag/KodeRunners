@@ -47,6 +47,11 @@ router.get("/view_all",middleware.isLoggedIn,(req,res)=>{
         console.log(e);
     })
 });
+router.get("/:id",(req,res)=>{
+    blog.findById(req.params.id).then((m)=>{
+        res.send(m);
+    });
+})
 router.get("/:id/edit",middleware.isLoggedIn,middleware.checkBlogOwner,(req,res)=>{
     blog.findById(req.params.id).then((blog)=>{
         res.render("edit_blog",{

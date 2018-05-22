@@ -1,0 +1,156 @@
+<% include partials/header %>
+<div class="content mt-3">
+        <div class="animated fadeIn">
+
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Your Profile</strong> <small> View</small>
+                        </div>
+                        <div class="card-body card-block">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-4">
+                                
+                            
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8">
+                                   
+                            <img src="/images/admin.jpg" style="border-radius: 100%;"><br><br>
+                         
+                        </div>
+                        <div style="margin-left: 22%;">
+                        <button class="btn btn-primary">Upload new image</button>
+                        </div>
+                        <!-- <div class="" style="padding: 30px;width: 100%;text-align:justify;">
+                            <hr>
+                                <h4><i class="fa fa-user"></i> <%= foundUser.name %></h4>
+                                <% if(foundUser.location) { %>
+                                    <h4><i class="fa fa-map-marker"></i> <%= foundUser.location %></h4>
+                                <% } %>
+                                <h4><i class="fa fa-at"></i> <a style="color: blue;" href="<%= foundUser.email %>"><%= foundUser.email %></a></h4>
+                                <% if(foundUser.website) { %>
+                                <h4><i class="fa fa-globe"></i> <a href="<%= foundUser.website %>" style="color: blue;"><%= foundUser.website %></a></h4>
+                                <% } %>
+                                 <% if(foundUser.education) { %>
+                                    <h4><%= foundUser.education %></h4>
+                                    <% } %>
+                                    
+                                </div> -->
+                            <div class="col-md-2"></div>
+                        </div>
+                        </div>
+                       
+                    </div>
+                    <div class="col-sm-6 col-md-8">
+                            <form action="/profile?_method=PUT" method="post">
+                            <div class="form-group">
+                                <label class=" form-control-label">Username </label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                                    <input class="form-control" disabled name="name" value="<%= foundUser.name %>">
+                                </div>
+                                
+                            </div>
+                            <div class="form-group">
+                                    <label class=" form-control-label">Email</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-at"></i></div>
+                                        <input name="email" class="form-control" disabled value="<%= foundUser.email %>">
+                                    </div>
+                                    
+                            </div>
+                            <div class="form-group">
+                                    <label class=" form-control-label">Education</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-book"></i></div>
+                                        <input class="form-control" value="<% 
+                                        if(foundUser.education){%><%= foundUser.education %><% } %>" name="education">
+                                    </div>
+                                    
+                            </div>
+                            <div class="form-group">
+                                <label class=" form-control-label">Phone Number</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-phone"></i></div>
+                                    <input class="form-control" name="phone" value="<% 
+                                    if(foundUser.phone){%><%= foundUser.phone %><% } %>">
+                                </div>
+                                <small class="form-text text-muted">ex.  99-999-9999</small>
+                            </div>
+                            <div class="form-group">
+                                    <label class=" form-control-label">Wesite</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-globe"></i></div>
+                                        <input class="form-control" name="website" value="<% if(foundUser.website){%><%= foundUser.website %><% } %>">
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group">
+                                        <label class=" form-control-label">Location</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-home"></i></div>
+                                            <input class="form-control" name="location" value="<% if(foundUser.location){%><%= foundUser.location %><% } %>">
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong class="card-title">Area of Intrest or Expretise</strong>
+                                        </div>
+                                        <div class="card-body">
+                                            
+                                              <select name="area" data-placeholder="Choose a country..." multiple="" class="standardSelect" style="display: none;">
+                                                <option></option>
+                                                <option value="United States">United States</option>
+                                                <option value="United Kingdom">United Kingdom</option>
+                                                <option value="Afghanistan" disabled>Afghanistan</option>
+                                                <option value="Aland Islands">Aland Islands</option>
+                                                <option value="Albania">Albania</option>
+                                                <option value="Algeria">Algeria</option>
+                                                <option value="American Samoa">American Samoa</option>
+                                                <option value="Andorra">Andorra</option>
+                                                <option value="Angola">Angola</option>
+                                                <option value="Anguilla">Anguilla</option>
+                                                <option value="Antarctica">Antarctica</option>
+                                            </select>
+                               
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="form-group">
+                                <div class="card">
+                                    <div class="card-header">
+                                            <strong class="card-title">Bio</strong>
+                                        </div>
+                                    
+                                
+                                <div class="input-group">
+                                   
+                                    <textarea name="bio" rows="5"class="form-control"><% if(foundUser.bio){%><%= foundUser.bio %><% } %></textarea>
+                                </div>
+                            </div>
+                            </div>
+                            
+                            <button class="btn btn-dark btn-block">Save</button>
+                         </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+
+
+            </div>
+
+
+        </div><!-- .animated -->
+    </div>
+
+
+<% include partials/footer %>

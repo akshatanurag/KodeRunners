@@ -16,6 +16,7 @@ const middleware = require('./middleware');
 
 const authRoutes = require('./routes/auth');
 const blogRoutes = require('./routes/blog');
+const profileRoutes = require('./routes/profile');
 
 require('./config/passport')(passport);
 
@@ -44,14 +45,23 @@ app.use(methodOverride("_method"));
 
 app.use(authRoutes);
 app.use("/blog",blogRoutes);
+app.use("/profile",profileRoutes);
 
 app.get("/",(req,res)=>{
+ 
     res.render("index");
 });
 
 
 app.get("/dashboard",middleware.isLoggedIn,(req,res)=>{
-    res.render("dashboard");
+    blog.find({
+        creator_id: req.user._id
+    }).then((m)=>{
+        res.render("dashboard",{
+            m
+        });
+    })
+    
 });
 
 

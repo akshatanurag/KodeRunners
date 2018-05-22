@@ -39,10 +39,13 @@
     <p id="fixed">Learn
       <span class="typer" id="main" data-words="great,fun,lightweight,easy" data-colors="orange" data-delay="100" data-deleteDelay="1000"></span>
       <span class="cursor" data-owner="main"></span></p><br>
+
                         <% if(!currentUser) {%>
                         <a class="btn btn-full" href="/login">LOGIN</a>
                         <a class="btn btn-ghost" href="/signup">SIGN UP</a>
-                        <% } %>
+                        <% } else {  %>
+                            <a class="btn btn-full" href="/dashboard">VIEW DASHBOARD</a>
+                            <% } %>
                     </div>
                 </div>
             </div>
