@@ -17,7 +17,7 @@ router.post("/new",middleware.isLoggedIn,(req,res)=>{
     var Blog = new blog({
         title: req.body.title,
         content: req.body.content,
-        createdAt: new Date().toDateString()
+        createdAt: new Date().toString()
 
     });
     Blog.creator_id= req.user._id;
@@ -30,8 +30,6 @@ router.post("/new",middleware.isLoggedIn,(req,res)=>{
         req.flash("error","Opps! Something went wrong");
         console.log(e);
         
-    }).catch((e)=>{
-        console.log(e);
     })
 });
 
@@ -47,9 +45,13 @@ router.get("/view_all",middleware.isLoggedIn,(req,res)=>{
         console.log(e);
     })
 });
-router.get("/:id",(req,res)=>{
+router.get("/:id",middleware.isApproved,(req,res)=>{
     blog.findById(req.params.id).then((m)=>{
         res.send(m);
+    },(e)=>{
+        console.log(e);
+        req.flash("Oops!Something went wrong");
+        res.redirect("back");
     });
 })
 router.get("/:id/edit",middleware.isLoggedIn,middleware.checkBlogOwner,(req,res)=>{
@@ -66,7 +68,7 @@ router.put("/:id/edit",middleware.isLoggedIn,middleware.checkBlogOwner,(req,res)
     blog.findByIdAndUpdate(req.params.id,{
         title: req.body.title,
         content: req.body.content,
-        updatedAt: new Date().getTime().toString()
+        updatedAt: new Date().getDate().toString()
     }).then(()=>{
         req.flash("success","Successfully Edited");
         res.redirect("back");

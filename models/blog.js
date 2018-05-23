@@ -27,6 +27,10 @@ var blogSchema = new mongoose.Schema({
     },
     updatedAt: {
         type: Number
+    },
+    status:{
+        type: Number,
+        default: 1
     }
 });
 

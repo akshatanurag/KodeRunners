@@ -28,5 +28,16 @@ module.exports = {
                 res.redirect("/dashboard");
             })
         }
-        }
+        },
+    isApproved: function(req,res,next){
+        blog.findById(req.params.id).then((Blog)=>{
+            
+            if(Blog.status === 2){
+            
+            return next();
+            }
+            req.flash("error","Blog Not Approved yet");
+            res.redirect("back");
+        })
+    } 
 }

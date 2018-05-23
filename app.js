@@ -6,6 +6,7 @@ const bodyParser =  require('body-parser');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const methodOverride = require('method-override');
+const fileUpload = require('express-fileupload');
 
 const passportLocalMongoose = require('passport-local-mongoose');
 
@@ -17,6 +18,7 @@ const middleware = require('./middleware');
 const authRoutes = require('./routes/auth');
 const blogRoutes = require('./routes/blog');
 const profileRoutes = require('./routes/profile');
+const adminRoutes = require('./routes/admin');
 
 require('./config/passport')(passport);
 
@@ -41,11 +43,13 @@ app.use(function(req,res,next){
     next();
 });
 app.use(methodOverride("_method"));
+app.use(fileUpload({ safeFileNames: true, preserveExtension: true, limits: { fileSize: 50 * 1024 * 1024 }}));
 
 
 app.use(authRoutes);
 app.use("/blog",blogRoutes);
 app.use("/profile",profileRoutes);
+app.use("/admin",adminRoutes);
 
 app.get("/",(req,res)=>{
  
