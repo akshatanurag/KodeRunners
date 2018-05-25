@@ -25,7 +25,7 @@ router.post("/new", middleware.isLoggedIn, (req, res) => {
     Blog.creator_id = req.user._id;
     Blog.creator_name = req.user.name;
     Blog.save().then((Blog) => {
-        req.flash("success", "Blog added");
+        req.flash("success", "Blog add");
         console.log(Blog);
         res.redirect("/dashboard");
     }, (e) => {
