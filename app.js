@@ -7,6 +7,8 @@ const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const methodOverride = require('method-override');
 const fileUpload = require('express-fileupload');
+const http = require('http');
+const socketIO = require('socket.io');
 
 const passportLocalMongoose = require('passport-local-mongoose');
 
@@ -24,6 +26,7 @@ require('./config/passport')(passport);
 
 
 var app = express();
+var server = http.createServer(app);
 app.use(require("express-session")({
     secret: "knsdckjsdnckjsdnckjsndcknwlkjacnwijanciwancsadkjcbsakjbcjka",
     resave: false,
@@ -44,7 +47,8 @@ app.use(function(req,res,next){
 });
 app.use(methodOverride("_method"));
 app.use(fileUpload({ safeFileNames: true, preserveExtension: true, limits: { fileSize: 50 * 1024 * 1024 }}));
-
+var io;
+global.io = socketIO(server);
 
 app.use(authRoutes);
 app.use("/blog",blogRoutes);
@@ -55,6 +59,10 @@ app.get("/",(req,res)=>{
  
     res.render("index");
 });
+
+// io.on('connection',(socket)=>{
+//     console.log("User connected");
+// })
 
 
 app.get("/dashboard",middleware.isLoggedIn,(req,res)=>{
@@ -72,6 +80,6 @@ app.get("/dashboard",middleware.isLoggedIn,(req,res)=>{
 
 
 var port =  process.env.PORT || 3000;
-app.listen(port,process.env.IP,()=>{
+server.listen(port,process.env.IP,()=>{
     console.log(`Server is up on ${port}`);
 });

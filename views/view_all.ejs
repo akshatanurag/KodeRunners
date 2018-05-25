@@ -28,13 +28,13 @@
                        
                         <td>
                             
-                            <a href="/blog/<%= m[i].id %>" style="color: white;" class="btn btn-success btn-xs">View</a>
+                            <a href="/blog/preview/<%= m[i].id %>" style="color: white;" class="btn btn-success btn-sm">Preview</a>
                             
                             <form style="display:  inline;" action="/blog/<%= m[i].id %>/edit?_method=EDIT" method="POST">
-                            <a href="/blog/<%= m[i].id %>/edit" style="color: white;" class="btn btn-primary btn-xs">Edit</a>
+                            <a href="/blog/<%= m[i].id %>/edit" style="color: white;" class="btn btn-primary btn-sm">Edit</a>
                             </form>
                             <form style="display:  inline;" action="/blog/<%= m[i].id %>/delete?_method=DELETE" method="POST">
-                            <button style="color: white;" class="btn btn-danger btn-xs">Delete</button>
+                            <button style="color: white;" class="btn btn-danger btn-sm">Delete</button>
                         </form>
                         </td>
                       </tr>

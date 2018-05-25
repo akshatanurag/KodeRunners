@@ -1,8 +1,8 @@
 <% include partials/header %>
-
-        <div class="content mt-3">
-            <div class="animated fadeIn">
-                <div class="row">
+<script src="/assets/js/vendor/jquery-2.1.4.min.js"></script>
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
 
                 <div class="col-md-12">
                     <div class="card">
@@ -10,51 +10,73 @@
                             <strong class="card-title">Data Table</strong>
                         </div>
                         <div class="card-body">
-                  <table id="bootstrap-data-table" class="table table-striped table-bordered">
-                    <thead>
-                      <tr>
-                        <th>Title</th>
-                        <th>Written By</th>
-                        
-                        <th>Created On</th>
-                        <th>Status</th>
-                        <th>View</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    <% for(var i=0;i<Blog.length;i++){ %>
-                      <tr>
-                         
-                        <td><%= Blog[i].title %></td>
-                        <td><%= Blog[i].creator_name %></td>
-                        <td><%= Blog[i].createdAt %></td>
-                        <td><%= Blog[i].status %></td>
-                       
-                        <td>
-                            
-                            <a href="/blog/<%= Blog[i].id %>" style="color: white;" class="btn btn-success btn-xs">View</a>
-                           
-                        </td>
-                      </tr>
-                      <% } %>
-                    </tbody>
-                  </table>
+                            <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Written By</th>
+
+                                        <th>Created On</th>
+                                        <th>Status</th>
+                                        <th>View</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for(var i=0;i<Blog.length;i++){ %>
+                                        <tr>
+
+                                            <td>
+                                                <%= Blog[i].title %>
+                                            </td>
+                                            <td>
+                                                <%= Blog[i].creator_name %>
+                                            </td>
+                                            <td>
+                                                <%= Blog[i].createdAt %>
+                                            </td>
+                                            <td>
+                                                <input data-post-id="" class="approvedStatus" name="<%= Blog[i]._id %>" type="checkbox">
+                                                <% if(Blog[i].status == 2) { %>
+                                                    <script>
+                                                        $("input[name=<%= Blog[i]._id %>]").prop('checked', true);    
+                                                    </script>
+                                                    
+                                                <% } else { %>
+                                                    <script>
+                                                            $("input[name=<%= Blog[i]._id %>]").prop('checked', false);    
+                                                        </script>
+                                                    <% } %>
+                                            </td>
+
+                                            <td>
+
+                                                <a href="/blog/<%= Blog[i].id %>" style="color: white;" class="btn btn-success btn-xs">View</a>
+
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
 
 
-                </div>
-            </div><!-- .animated -->
-        </div><!-- .content -->
+            </div>
+        </div>
+        <!-- .animated -->
+    </div>
+    <!-- .content -->
 
 
-    </div><!-- /#right-panel -->
+    </div>
+    <!-- /#right-panel -->
 
     <!-- Right Panel -->
+    <script src="/socket.io/socket.io.js"></script>
+   
 
 
-    <script src="/assets/js/vendor/jquery-2.1.4.min.js"></script>
     <script src="/assets/js/popper.min.js"></script>
     <script src="/assets/js/plugins.js"></script>
     <script src="/assets/js/main.js"></script>
@@ -74,11 +96,31 @@
 
 
     <script type="text/javascript">
-        $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
-        } );
+    var socket = io();
+        $(document).ready(function () {
+            $('#bootstrap-data-table-export').DataTable();
+        });
+        $("input[type='checkbox']").change(function(e){
+            if($(this).prop("checked") == true){
+            socket.emit("approve",{
+                id: this.name,
+                status: 2
+            },function(){
+                console.log("recieved");
+            })
+        }
+        else{
+            socket.emit("approve",{
+                id: this.name,
+                status: 0
+            },function(){
+                console.log("recieved");
+            })
+        }
+        })
     </script>
 
 
-</body>
-</html>
+    </body>
+
+    </html> 
