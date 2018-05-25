@@ -23,7 +23,7 @@ const profileRoutes = require('./routes/profile');
 const adminRoutes = require('./routes/admin');
 
 require('./config/passport')(passport);
-
+process.setMaxListeners(0);
 
 var app = express();
 var server = http.createServer(app);

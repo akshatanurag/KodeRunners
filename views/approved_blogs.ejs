@@ -102,15 +102,16 @@
         });
         $("input[type='checkbox']").change(function(e){
             if($(this).prop("checked") == true){
-            socket.emit("approve",{
+            socket.emit("approved",{
                 id: this.name,
-                status: 1
+                status: 2
             },function(){
                 console.log("recieved");
             })
         }
         else{
-            socket.emit("approve",{
+            
+            socket.emit("approved",{
                 id: this.name,
                 status: 0
             },function(){

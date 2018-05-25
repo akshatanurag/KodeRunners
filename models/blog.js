@@ -22,7 +22,7 @@ var blogSchema = new mongoose.Schema({
     //     ref: "comment"
     // }],
     createdAt: {
-        type: Date,
+        type: Number,
         default: Date.now
     },
     updatedAt: {
@@ -30,7 +30,7 @@ var blogSchema = new mongoose.Schema({
     },
     status:{
         type: Number,
-        default: 1
+        default: 0
     }
 });
 

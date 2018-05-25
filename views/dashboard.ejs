@@ -173,7 +173,14 @@
                                     </a>
                                     <div class="media-body">
                                         <h2 class="text-light display-6"><%= currentUser.name %></h2>
-                                        <p>Project Manager</p>
+                                        <% if(currentUser.role == 2) { %>
+                                        <p>Super Admin</p>
+                                        <% } else if(currentUser.role == 1) { %>
+                                        <p>Admin</p>
+                                        <% } else { %>
+                                            <p></p>
+                                        <% } %>
+
                                     </div>
                                 </div>
                             </div>

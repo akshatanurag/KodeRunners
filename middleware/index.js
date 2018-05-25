@@ -39,7 +39,7 @@ module.exports = {
                 return next();
             }
             req.flash("error", "Blog Not Approved yet");
-            res.redirect("/dashboard");
+            res.redirect("back");
         })
 
     },

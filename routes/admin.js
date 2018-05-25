@@ -4,7 +4,7 @@ var express = require('express');
 var middleware = require('../middleware');
 
 const {blog} = require('../models/blog');
-
+const User = require('../models/user');
 
 // var app = express();
 // var server = http.createServer(app);
@@ -35,8 +35,108 @@ router.get("/blog",middleware.isLoggedIn,middleware.isAdmin,(req,res)=>{
     })
    
 });
-router.post("/blog",(req,res)=>{
-    console.log(req.body.switch);
+router.get("/blog/approved",middleware.isLoggedIn,middleware.isAdmin,(req,res)=>{
+    blog.find({
+        status: 1
+    }).then((Blog)=>{
+        res.render("approved_blogs",{
+            Blog
+        });
+    },(e)=>{
+        req.flash("error","Oops!Something went wrong");
+        console.log(e);
+        res.redirect("back");
+    });
+    io.on('connection',(socket)=>{
+        socket.on("approved",(s,callback)=>{
+            blog.findByIdAndUpdate(s.id,{
+                status: s.status
+            }).then(()=>{
+                req.flash("success","Blog was approved");
+            },(e)=>{
+                req.flash("error","Something went wrong");
+            })
+            callback();
+        })
+    })
+});
+router.get("/blog/unapproved",middleware.isLoggedIn,middleware.isAdmin,(req,res)=>{
+    blog.find({
+        status: 0,
+        
+    }).then((Blog)=>{
+        res.render("unapproved_blogs",{
+            Blog
+        });
+    },(e)=>{
+        req.flash("error","Oops!Something went wrong");
+        console.log(e);
+        res.redirect("back");
+    });
+    io.on('connection',(socket)=>{
+        socket.on("unapproved",(s,callback)=>{
+            blog.findByIdAndUpdate(s.id,{
+                status: s.status
+            }).then(()=>{
+                req.flash("success","Blog was approved");
+            },(e)=>{
+                req.flash("error","Something went wrong");
+            })
+            callback();
+        })
+    })
+});
+
+// ALL USERS
+
+router.get("/users",middleware.isLoggedIn,middleware.isAdmin,(req,res)=>{
+    User.find().then((m)=>{
+        res.render("alluser",{
+            m
+        });
+        io.on('connection',(socket)=>{
+            socket.on("makeAdmin",(s,callback)=>{
+
+                User.findByIdAndUpdate(s.id,{
+                    role: s.role
+                }).then(()=>{
+                    req.flash("success","Made Admin");
+                   
+                },(e)=>{
+                    req.flash("error","Something went wrong");
+                })
+                callback();
+            })
+        })
+    },(e)=>{
+        console.log(e);
+        req.flash("error","Opps! Something went wrong");
+        res.redirect("back");
+    }).catch((e)=>{
+        console.log(e);
+        req.flash("error","Opps! Something went wrong");
+        res,redirect("back");
+    })
 })
+
+router.get("/admins",middleware.isLoggedIn,middleware.isAdmin,(req,res)=>{
+    User.find({
+        role: 1
+    }).then((m)=>{
+        res.render("admins",{
+            m
+        });
+
+    },(e)=>{
+        console.log(e);
+        req.flash("error","Opps! Something went wrong");
+        res.redirect("back");
+    }).catch((e)=>{
+        console.log(e);
+        req.flash("error","Opps! Something went wrong");
+        res,redirect("back");
+    })
+})
+
 
 module.exports = router;
