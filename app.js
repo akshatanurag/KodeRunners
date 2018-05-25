@@ -9,6 +9,7 @@ const methodOverride = require('method-override');
 const fileUpload = require('express-fileupload');
 const http = require('http');
 const socketIO = require('socket.io');
+require ('newrelic');
 
 const passportLocalMongoose = require('passport-local-mongoose');
 

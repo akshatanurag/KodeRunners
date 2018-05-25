@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb://localhost/kodeRunners",()=>{
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/kodeRunners",()=>{
     console.log("connected to db");
 });
 mongoose.Promise = global.Promise;
