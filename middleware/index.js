@@ -51,5 +51,12 @@ module.exports = {
         }
         req.flash("error","Not Permitted");
         res.redirect("/dashboard");
+    },
+    isSuperAdmin :  function(req,res,next) {
+        if(req.user.role == 2){
+            return next()
+        }
+        req.flash("error","Not Permitted");
+        res.redirect("/dashboard");
     }
 }

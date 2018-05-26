@@ -17,6 +17,7 @@
                         <th>Email</th>
                         <th>Number</th>
                         <th>Role</th>
+                        <th>Make Admin</th>
                         <th>View Profile</th>
                     
                         
@@ -24,19 +25,41 @@
                       </tr>
                     </thead>
                     <tbody>
-                    <% for(var i=0;i<m.length;i++){ %>
+                    <% for(var i=0;i<allUser.length;i++){ %>
                       <tr>
                          
-                        <td><%= m[i].name %></td>
-                        <td><%= m[i].email %></td>
-                        <td><%= m[i].phone %></td>
-                        <% if(m[i].role == 0) { %>
+                        <td><%= allUser[i].name %></td>
+                        <td><%= allUser[i].email %></td>
+                        <td><%= allUser[i].phone %></td>
+                        <% if(allUser[i].role == 0) { %>
                             <td style="color: green;">User</td>
-                            <% } else if(m[i].role == 1) { %>
+                            <% } else if(allUser[i].role == 1) { %>
                                 <td style="color: blue;">Admin</td>
                                 <%} else { %>
                                     <td style="color: yellow;">Super Admin</td>
                                 <% } %>
+
+                            <% if(allUser[i].role != 2){ %>
+                            <td>
+                                
+                                <input data-post-id="" class="approvedStatus" name="<%= allUser[i]._id %>" type="checkbox">
+                                <% if(allUser[i].role == 1 ) { %>
+                                    <script>
+                                        $("input[name=<%= allUser[i]._id %>]").prop('checked', true);    
+                                    </script>
+                                    
+                                <% } else { %>
+                                    <script>
+                                            $("input[name=<%= allUser[i]._id %>]").prop('checked', false);    
+                                        </script>
+                                    <% } %>
+                            </td>
+                        <% } else { %>
+                            <td></td>
+                            <% } %>
+
+                    
+                        
                             
                           <td>  
                             <a href="#" style="color: white;" class="btn btn-success btn-sm">View Profile</a>
@@ -86,7 +109,25 @@
         $(document).ready(function() {
           $('#bootstrap-data-table-export').DataTable();
         } );
-  
+        $("input[type='checkbox']").change(function(e){
+            if($(this).prop("checked") == true){
+            socket.emit("makeAdmin",{
+                id: this.name,
+                role: 1
+            },function(){
+                console.log("recieved");
+            })
+        }
+        else{
+            socket.emit("makeAdmin",{
+                id: this.name,
+                role: 0
+            },function(){
+                console.log("recieved");
+            })
+        }
+        })
+        
     </script>
 
 

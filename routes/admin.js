@@ -94,20 +94,6 @@ router.get("/users",middleware.isLoggedIn,middleware.isAdmin,(req,res)=>{
         res.render("alluser",{
             m
         });
-        io.on('connection',(socket)=>{
-            socket.on("makeAdmin",(s,callback)=>{
-
-                User.findByIdAndUpdate(s.id,{
-                    role: s.role
-                }).then(()=>{
-                    req.flash("success","Made Admin");
-                   
-                },(e)=>{
-                    req.flash("error","Something went wrong");
-                })
-                callback();
-            })
-        })
     },(e)=>{
         console.log(e);
         req.flash("error","Opps! Something went wrong");

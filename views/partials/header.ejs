@@ -65,7 +65,13 @@
                         <a href="/blog/view_all"><i class="menu-icon fa fa-eye"></i>Your Blogs</a>
                       
                     </li>
-                
+                    <% if(currentUser.role == 2){ %>
+                    <h3 class="menu-title">Super Admin</h3><!-- /.menu-title -->
+                    <li class="">
+                        <a href="/superadmin/users"  aria-expanded="false"> <i class="menu-icon ti ti-crown"></i>Users</a>
+                    
+                    </li>
+                    <% } %>
                     <% if(currentUser.role == 2 || currentUser.role == 1){ %>
                     <h3 class="menu-title">Admin</h3><!-- /.menu-title -->
 
@@ -87,6 +93,8 @@
                            
                         </ul>
                     </li>
+                 
+                   
                     <% } %>
 
                     <!-- <li class="menu-item-has-children dropdown">

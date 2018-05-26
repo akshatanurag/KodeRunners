@@ -10,7 +10,6 @@ const fileUpload = require('express-fileupload');
 const http = require('http');
 const socketIO = require('socket.io');
 require ('newrelic');
-
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const {mongoose} = require('./db/mongoose');
@@ -22,9 +21,10 @@ const authRoutes = require('./routes/auth');
 const blogRoutes = require('./routes/blog');
 const profileRoutes = require('./routes/profile');
 const adminRoutes = require('./routes/admin');
+const superAdminRoutes = require('./routes/superadmin');
 
 require('./config/passport')(passport);
-process.setMaxListeners(0);
+process.setMaxListeners(100);
 
 var app = express();
 var server = http.createServer(app);
@@ -55,6 +55,7 @@ app.use(authRoutes);
 app.use("/blog",blogRoutes);
 app.use("/profile",profileRoutes);
 app.use("/admin",adminRoutes);
+app.use("/superadmin",superAdminRoutes);
 
 app.get("/",(req,res)=>{
  
