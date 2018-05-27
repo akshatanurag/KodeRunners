@@ -163,8 +163,8 @@
                             <div class="card-header user-header alt bg-dark">
                                 <div class="media">
                                     <a href="#">
-                                        <% if(currentUser.dp) { %>
-                                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="/images/uploads/profile/<%= currentUser._id %>.jpg">
+                                        <% if(currentUser.dp === `${currentUser._id}.jpg`) { %>
+                                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="/images/uploads/profile/<%= currentUser.dp %>">
                                         <% } else {  %>
                                        
                                             <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="/images/uploads/profile/default_user.png">

@@ -48,8 +48,7 @@ var userSchema = new mongoose.Schema({
         default: 0
     },
     dp:{
-        type: Boolean,
-        default: false
+        type: String
     }
 });
 mongoose.Promise=global.Promise;

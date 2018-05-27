@@ -18,12 +18,12 @@ module.exports = {
                     next();
                 } else {
                     req.flash("error", "Not permitted");
-                    res.redirect("/dashboard")
+                    res.redirect("error")
                 }
             }, (e) => {
                 console.log(e);
                 req.flash("error", "Not permitted");
-                res.redirect("/dashboard");
+                res.redirect("*");
             }).catch((e) => {
                 console.log(e);
                 req.flash("error", "Not permitted");
@@ -50,13 +50,13 @@ module.exports = {
             return next();
         }
         req.flash("error","Not Permitted");
-        res.redirect("/dashboard");
+        res.redirect("error");
     },
     isSuperAdmin :  function(req,res,next) {
         if(req.user.role == 2){
             return next()
         }
         req.flash("error","Not Permitted");
-        res.redirect("/dashboard");
+        res.redirect("error");
     }
 }

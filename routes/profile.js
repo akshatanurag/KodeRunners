@@ -26,7 +26,7 @@ router.put("/",middleware.isLoggedIn,(req,res)=>{
   if(sampleFile.mimetype === "image/jpeg"){
   sampleFile.mv(`./public/images/uploads/profile/${req.user._id}.jpg`, function(err) {
     if (err){
-        dp= false;
+        dp= 'defaul_user.png';
         req.flash("error","Profile pic not updated.");
     }
     User.findByIdAndUpdate(req.user._id,{
@@ -36,7 +36,7 @@ router.put("/",middleware.isLoggedIn,(req,res)=>{
         location: req.body.location,
         area: req.body.area,
         bio: req.body.bio,
-        dp: dp
+        dp: `${req.user._id}.jpg`
     }).then(()=>{
         req.flash("success","Profile edited successfully");
         res.redirect("back");
