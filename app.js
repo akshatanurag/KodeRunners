@@ -57,6 +57,8 @@ app.use("/profile",profileRoutes);
 app.use("/admin",adminRoutes);
 app.use("/superadmin",superAdminRoutes);
 
+
+
 app.get("/",(req,res)=>{
  
     res.render("index");
@@ -77,6 +79,10 @@ app.get("/dashboard",middleware.isLoggedIn,(req,res)=>{
     })
     
 });
+
+app.get("*",(req,res)=>{
+    res.render("404");
+})
 
 
 
