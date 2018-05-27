@@ -16,6 +16,12 @@
 <script src="/assets/js/lib/vector-map/country/jquery.vmap.world.js"></script>
 
 <script src="/assets/js/lib/chosen/chosen.jquery.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+
+<!-- Include Editor JS files. -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.1/js/froala_editor.pkgd.min.js"></script>
 <script>
     ( function ( $ ) {
         "use strict";
@@ -41,7 +47,10 @@
                 });
             });
 </script>
-
+ <script> jQuery(function() { jQuery('textarea').froalaEditor({
+     heightMax: 600,
+     heightMin: 500,
+ }) }); </script>
 
 </body>
 </html>
