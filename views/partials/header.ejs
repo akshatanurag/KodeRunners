@@ -6,12 +6,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Sufee Admin - HTML5 Admin Template</title>
+    <title>KodeRunners | Dashboard</title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="apple-icon.png">
-    <link rel="shortcut icon" href="favicon.ico">
 
     <link rel="stylesheet" href="/assets/css/normalize.css">
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
@@ -26,7 +24,14 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
-    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=hy83xxlyirfztb9w6llr0q3vbfwoo3xhexlbmd40pa1jb2g2"></script>
+    <!-- <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=hy83xxlyirfztb9w6llr0q3vbfwoo3xhexlbmd40pa1jb2g2"></script> -->
+<!-- Include external CSS. -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+
+<!-- Include Editor style. -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.1/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.1/css/froala_style.min.css" rel="stylesheet" type="text/css" />
    
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
@@ -65,36 +70,45 @@
                         <a href="/blog/view_all"><i class="menu-icon fa fa-eye"></i>Your Blogs</a>
                       
                     </li>
-                
-
-                    <h3 class="menu-title">Icons</h3><!-- /.menu-title -->
+                    <% if(currentUser.role == 2){ %>
+                    <h3 class="menu-title">Super Admin</h3><!-- /.menu-title -->
+                    <li class="">
+                        <a href="/superadmin/users"  aria-expanded="false"> <i class="menu-icon ti ti-crown"></i>Users</a>
+                    
+                    </li>
+                    <% } %>
+                    <% if(currentUser.role == 2 || currentUser.role == 1){ %>
+                    <h3 class="menu-title">Admin</h3><!-- /.menu-title -->
 
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Icons</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-file-text"></i>Blogs</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="font-fontawesome.html">Font Awesome</a></li>
-                            <li><i class="menu-icon ti-themify-logo"></i><a href="font-themify.html">Themefy Icons</a></li>
+                            <li><i class="menu-icon fa fa-files-o"></i><a href="/admin/blog">View All</a></li>
+                            <li><i class="menu-icon fa fa-check-square"></i><a href="/admin/blog/approved">Approved Blogs</a></li>
+                            <li><i class="menu-icon fa fa-exclamation-triangle"></i><a href="/admin/blog/unapproved">Unpproved Blogs</a></li>
+                            
                         </ul>
                     </li>
-                    <li>
-                        <a href="widgets.html"> <i class="menu-icon ti-email"></i>Widgets </a>
-                    </li>
+                   
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Charts</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Users</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-line-chart"></i><a href="charts-chartjs.html">Chart JS</a></li>
-                            <li><i class="menu-icon fa fa-area-chart"></i><a href="charts-flot.html">Flot Chart</a></li>
-                            <li><i class="menu-icon fa fa-pie-chart"></i><a href="charts-peity.html">Peity Chart</a></li>
+                            <li><i class="menu-icon fa ti-crown"></i><a href="/admin/admins">Admins</a></li>
+                            <li><i class="menu-icon fa fa-user"></i><a href="/admin/users">User</a></li>
+                           
                         </ul>
                     </li>
+                 
+                   
+                    <% } %>
 
-                    <li class="menu-item-has-children dropdown">
+                    <!-- <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-area-chart"></i>Maps</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-map-o"></i><a href="maps-gmap.html">Google Maps</a></li>
                             <li><i class="menu-icon fa fa-street-view"></i><a href="maps-vector.html">Vector Maps</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                     <h3 class="menu-title">Profile</h3><!-- /.menu-title -->
                     <li class="">
                         <a href="/profile"> <i class="menu-icon fa fa-user"></i>Profile</a>
@@ -198,7 +212,13 @@
                 <div class="col-sm-5">
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="/images/admin.jpg" alt="User Avatar">
+                            <% if(currentUser.dp === `${currentUser._id}.jpg`) { %>
+                                    <img class="user-avatar rounded-circle" src="/images/uploads/profile/<%= currentUser.dp %>" alt="User Avatar">
+                                <% }  else { %>
+                                    <img class="user-avatar rounded-circle" src="/images/uploads/profile/default_user.png" alt="User Avatar">
+                                    <% } %>
+                              
+                            
                         </a>
 
                         <div class="user-menu dropdown-menu">

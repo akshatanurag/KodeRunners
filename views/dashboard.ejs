@@ -4,7 +4,7 @@
 
         <div class="content mt-3">
             
-            <% if(currentUser.role == 1 || currentUser.role == 2){ %>
+          
             <div>
            <div class="col-sm-6 col-lg-3">
                 <div class="card text-white bg-flat-color-1">
@@ -84,7 +84,7 @@
                 </div>
             </div>
         </div>
-        <% } %>
+       
             <!--/.col-->
 
             <div class="col-lg-3 col-md-6">
@@ -163,11 +163,24 @@
                             <div class="card-header user-header alt bg-dark">
                                 <div class="media">
                                     <a href="#">
-                                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="images/admin.jpg">
+                                        <% if(currentUser.dp === `${currentUser._id}.jpg`) { %>
+                                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="/images/uploads/profile/<%= currentUser.dp %>">
+                                        <% } else {  %>
+                                       
+                                            <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="/images/uploads/profile/default_user.png">
+                                        <% } %>
+                                           
                                     </a>
                                     <div class="media-body">
                                         <h2 class="text-light display-6"><%= currentUser.name %></h2>
-                                        <p>Project Manager</p>
+                                        <% if(currentUser.role == 2) { %>
+                                        <p>Super Admin</p>
+                                        <% } else if(currentUser.role == 1) { %>
+                                        <p>Admin</p>
+                                        <% } else { %>
+                                            <p></p>
+                                        <% } %>
+
                                     </div>
                                 </div>
                             </div>

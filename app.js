@@ -6,7 +6,10 @@ const bodyParser =  require('body-parser');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const methodOverride = require('method-override');
-
+const fileUpload = require('express-fileupload');
+const http = require('http');
+const socketIO = require('socket.io');
+require ('newrelic');
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const {mongoose} = require('./db/mongoose');
@@ -17,11 +20,14 @@ const middleware = require('./middleware');
 const authRoutes = require('./routes/auth');
 const blogRoutes = require('./routes/blog');
 const profileRoutes = require('./routes/profile');
+const adminRoutes = require('./routes/admin');
+const superAdminRoutes = require('./routes/superadmin');
 
 require('./config/passport')(passport);
-
+process.setMaxListeners(100);
 
 var app = express();
+var server = http.createServer(app);
 app.use(require("express-session")({
     secret: "knsdckjsdnckjsdnckjsndcknwlkjacnwijanciwancsadkjcbsakjbcjka",
     resave: false,
@@ -41,16 +47,26 @@ app.use(function(req,res,next){
     next();
 });
 app.use(methodOverride("_method"));
-
+app.use(fileUpload({ safeFileNames: true, preserveExtension: true, limits: { fileSize: 50 * 1024 * 1024 }}));
+var io;
+global.io = socketIO(server);
 
 app.use(authRoutes);
 app.use("/blog",blogRoutes);
 app.use("/profile",profileRoutes);
+app.use("/admin",adminRoutes);
+app.use("/superadmin",superAdminRoutes);
+
+
 
 app.get("/",(req,res)=>{
  
     res.render("index");
 });
+
+// io.on('connection',(socket)=>{
+//     console.log("User connected");
+// })
 
 
 app.get("/dashboard",middleware.isLoggedIn,(req,res)=>{
@@ -64,10 +80,14 @@ app.get("/dashboard",middleware.isLoggedIn,(req,res)=>{
     
 });
 
+app.get("*",(req,res)=>{
+    res.render("404");
+})
+
 
 
 
 var port =  process.env.PORT || 3000;
-app.listen(port,process.env.IP,()=>{
+server.listen(port,process.env.IP,()=>{
     console.log(`Server is up on ${port}`);
 });

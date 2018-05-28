@@ -46,6 +46,9 @@ var userSchema = new mongoose.Schema({
     role:{
         type: Number,
         default: 0
+    },
+    dp:{
+        type: String
     }
 });
 mongoose.Promise=global.Promise;

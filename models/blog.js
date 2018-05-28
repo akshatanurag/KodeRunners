@@ -22,11 +22,15 @@ var blogSchema = new mongoose.Schema({
     //     ref: "comment"
     // }],
     createdAt: {
-        type: Date,
+        type: Number,
         default: Date.now
     },
     updatedAt: {
         type: Number
+    },
+    status:{
+        type: Number,
+        default: 0
     }
 });
 
