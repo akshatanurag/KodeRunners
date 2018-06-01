@@ -10,6 +10,7 @@ const fileUpload = require('express-fileupload');
 const http = require('http');
 const socketIO = require('socket.io');
 require ('newrelic');
+const helmet = require('helmet');
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const {mongoose} = require('./db/mongoose');
@@ -23,16 +24,18 @@ const profileRoutes = require('./routes/profile');
 const adminRoutes = require('./routes/admin');
 const superAdminRoutes = require('./routes/superadmin');
 
-require('./config/passport')(passport);
+
 process.setMaxListeners(100);
 
 var app = express();
 var server = http.createServer(app);
+app.set('trust proxy', 1)
 app.use(require("express-session")({
     secret: "knsdckjsdnckjsdnckjsndcknwlkjacnwijanciwancsadkjcbsakjbcjka",
     resave: false,
     saveUninitialized: false
 }));
+app.use(helmet());
 app.use(cookieParser()); 
 app.set("view engine","ejs");
 app.use(express.static(__dirname + '/public'));
@@ -48,6 +51,7 @@ app.use(function(req,res,next){
 });
 app.use(methodOverride("_method"));
 app.use(fileUpload({ safeFileNames: true, preserveExtension: true, limits: { fileSize: 50 * 1024 * 1024 }}));
+require('./config/passport')(passport);
 var io;
 global.io = socketIO(server);
 

@@ -1,5 +1,6 @@
 // load all the things we need
 var LocalStrategy    = require('passport-local').Strategy;
+var validator = require('validator');
 
 
 // load up the user model
@@ -93,8 +94,17 @@ module.exports = function(passport) {
                         var newUser            = new User();
 
                         newUser.email    = email;
+                        if(validator.equals(req.body.password,req.body.password2)){
                         newUser.password = newUser.generateHash(password);
+                        }
+                        else{
+                            return done(null, false, req.flash('signupMessage', 'Passwords do not match'));                            
+                        }
                         newUser.name = req.body.name;
+                        if(validator.isEmpty(newUser.name)){
+                            return done(null, false, req.flash('signupMessage', 'Name is required'));
+                            
+                        }
 
                         newUser.save(function(err) {
                             if (err)

@@ -5,7 +5,8 @@ const validator = require('validator');
 
 var userSchema = new mongoose.Schema({
         name: {
-            type: String
+            type: String,
+            required: true
         },
        email: {
         type: String,
@@ -54,7 +55,7 @@ var userSchema = new mongoose.Schema({
 mongoose.Promise=global.Promise;
 // generating a hash
 userSchema.methods.generateHash = function(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+    return bcrypt.hashSync(password,bcrypt.genSaltSync(10), null);
 };
 
 // checking if password is valid
