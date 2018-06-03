@@ -13,16 +13,23 @@ require ('newrelic');
 const helmet = require('helmet');
 const passportLocalMongoose = require('passport-local-mongoose');
 
+
+
+
 const {mongoose} = require('./db/mongoose');
 const User = require('./models/user');
 const {blog} = require('./models/blog');
 const middleware = require('./middleware');
+
+
+
 
 const authRoutes = require('./routes/auth');
 const blogRoutes = require('./routes/blog');
 const profileRoutes = require('./routes/profile');
 const adminRoutes = require('./routes/admin');
 const superAdminRoutes = require('./routes/superadmin');
+const forgotRoutes = require('./routes/forgot');
 
 
 process.setMaxListeners(100);
@@ -55,11 +62,16 @@ require('./config/passport')(passport);
 var io;
 global.io = socketIO(server);
 
+
+
+
 app.use(authRoutes);
+app.use(forgotRoutes);
 app.use("/blog",blogRoutes);
 app.use("/profile",profileRoutes);
 app.use("/admin",adminRoutes);
 app.use("/superadmin",superAdminRoutes);
+
 
 
 

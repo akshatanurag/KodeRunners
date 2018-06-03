@@ -50,7 +50,9 @@ var userSchema = new mongoose.Schema({
     },
     dp:{
         type: String
-    }
+    },
+    resetPasswordToken: String,
+    resetPasswordExpires: Date
 });
 mongoose.Promise=global.Promise;
 // generating a hash

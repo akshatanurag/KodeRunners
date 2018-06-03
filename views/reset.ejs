@@ -1,0 +1,52 @@
+
+	<% include partials/header_log %>
+
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('/images/bg-01.jpg');">
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+				<form class="login100-form validate-form" method="POST" action="/reset/<%= token %>">
+					<span class="login100-form-title p-b-49">
+						Enter New Password
+					</span>
+					<% if(success.length>0) {%>
+                        <div class="alert alert-success"><%= success %></div>
+						<% } %>
+						<% if(error.length>0) {%>
+							<div class="alert alert-danger"><%= error %></div>
+							<% } %>
+					<div class="wrap-input100 validate-input m-b-23">
+						<span class="label-input100">Password</span>
+						<input class="input100" type="password" name="password" placeholder="Enter New Password">
+						<span class="focus-input100" data-symbol="&#xf190;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<span class="label-input100">Confirm Password</span>
+						<input class="input100" type="password" name="confirm" placeholder="Type the same password">
+						<span class="focus-input100" data-symbol="&#xf190;"></span>
+					</div>
+					
+					<div class="text-right p-t-8 p-b-31">
+						<a href="#">
+							Forgot password?
+						</a>
+					</div>
+					
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn">
+								Reset
+							</button>
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+    <% include partials/footer_log %>
