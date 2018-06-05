@@ -17,7 +17,7 @@ router.get('/forgot', function(req, res) {
   router.post('/forgot', function(req, res, next) {
     async.waterfall([
       function(done) {
-        crypto.randomBytes(20, function(err, buf) {
+        crypto.randomBytes(30, function(err, buf) {
           var token = buf.toString('hex');
           done(err, token);
         });
@@ -73,6 +73,7 @@ router.get('/forgot', function(req, res) {
         return res.redirect('/forgot');
       }
       res.render('reset', {token: req.params.token});
+     
     });
   });
   

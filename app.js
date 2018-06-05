@@ -61,6 +61,8 @@ app.use(fileUpload({ safeFileNames: true, preserveExtension: true, limits: { fil
 require('./config/passport')(passport);
 var io;
 global.io = socketIO(server);
+app.use(bodyParser.json());
+
 
 
 
@@ -71,6 +73,14 @@ app.use("/blog",blogRoutes);
 app.use("/profile",profileRoutes);
 app.use("/admin",adminRoutes);
 app.use("/superadmin",superAdminRoutes);
+
+var getIP = require('ipware')().get_ip;
+app.use(function(req, res, next) {
+    var ipInfo = getIP(req);
+    console.log(ipInfo);
+    // { clientIp: '127.0.0.1', clientIpRoutable: false }
+    next();
+});
 
 
 
