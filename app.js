@@ -15,7 +15,6 @@ const passportLocalMongoose = require('passport-local-mongoose');
 
 
 
-
 const {mongoose} = require('./db/mongoose');
 const User = require('./models/user');
 const {blog} = require('./models/blog');
@@ -77,7 +76,15 @@ app.use("/superadmin",superAdminRoutes);
 var getIP = require('ipware')().get_ip;
 app.use(function(req, res, next) {
     var ipInfo = getIP(req);
-    console.log(ipInfo);
+    if(req.user){
+    User.findByIdAndUpdate(req.user._id,{
+        lastLogin: ipInfo.clientIp
+    }).then(()=>{
+        console.log("saved ip");
+    },(e)=>{
+        console.log(e);
+    })
+}
     // { clientIp: '127.0.0.1', clientIpRoutable: false }
     next();
 });
@@ -89,6 +96,8 @@ app.get("/",(req,res)=>{
  
     res.render("index");
 });
+
+
 
 // io.on('connection',(socket)=>{
 //     console.log("User connected");
