@@ -80,7 +80,7 @@ app.use(function(req, res, next) {
     User.findByIdAndUpdate(req.user._id,{
         lastLogin: ipInfo.clientIp
     }).then(()=>{
-        console.log("saved ip");
+        console.log("saving the ip");
     },(e)=>{
         console.log(e);
     })
