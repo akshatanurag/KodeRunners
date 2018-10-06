@@ -4,7 +4,9 @@ mongoose.connect(uri,(err)=>{
     if(err){
         console.log(err);
     }
+    else{
     console.log("connected to db");
+    }
 });
 mongoose.Promise = global.Promise;
 

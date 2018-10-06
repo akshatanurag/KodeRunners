@@ -64,7 +64,7 @@ router.get("/preview/:id", middleware.isLoggedIn, middleware.checkBlogOwner, (re
 
 router.get("/:id", middleware.isApproved, (req, res) => {
     blog.findById(req.params.id).then((m) => {
-        res.send(m);
+        res.render("blog_disp",{m});
     }, (e) => {
         console.log(e);
         req.flash("Oops!Something went wrong");
