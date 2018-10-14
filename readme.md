@@ -4,5 +4,12 @@
 * Role: 0 (User)
 * Chage the roles manually from database
 
-#ALSO I WOULD NEED A COMPLETE LIST WAHT ALL FEATURES ARE NEEDED WHATS APP THEM TO ME ASAP!
+Conversion of HTML to ejs required (causing some bugs).
+
+login info : abcd@gmail.com
+password : kdrcms1
+(Super Admin)
+
+View the article in articles head.
+
 
