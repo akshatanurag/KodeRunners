@@ -4,12 +4,3 @@
 * Role: 0 (User)
 * Chage the roles manually from database
 
-Conversion of HTML to ejs required (causing some bugs).
-
-login info : abcd@gmail.com
-password : kdrcms1
-(Super Admin)
-
-View the article in articles head.
-
-
